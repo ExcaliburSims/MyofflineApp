@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, FlatList, View, Text} from 'react-native';
 import axios from 'axios';
+import CardActu from './components/Card';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -19,11 +20,11 @@ const App = () => {
         setLoading(false);
       });
   };
-  const renderItem = ({item}) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{item.name}</Text>
-    </View>
-  );
+  const renderItem = ({item}) => {
+    return (
+      <CardActu name={item.name} country={item.country} picture={item.image} />
+    );
+  };
   return (
     <SafeAreaView style={styles.container}>
       <FlatList

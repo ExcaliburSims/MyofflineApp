@@ -1,64 +1,13 @@
-import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ImageBackground,
-  Share,
-  TouchableOpacity,
-} from 'react-native';
-import {GlobalStyle} from '../styles/global';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import LinearGradient from 'react-native-linear-gradient';
-import dayjs from 'dayjs';
-import {decode} from 'html-entities';
+import React from 'react';
+import {Text, View, StyleSheet, Image} from 'react-native';
 
 const CardActu = props => {
   return (
     <View style={styles.card}>
-      <View style={styles.cardbox}>
-        <Text style={styles.title}>{props.title}</Text>
-        <View style={styles.dateBox}>
-          <Icon name="clock-o" size={20} style={styles.clockText} />
-          <Text style={[GlobalStyle.titleText, styles.clockbox]}>
-            {dayjs(props.date).format('DD MMMM YYYY')}
-          </Text>
-        </View>
-        <ImageBackground
-          source={{uri: props.picture}}
-          style={styles.imageCard}
-          imageStyle={{borderRadius: 14}}>
-          <LinearGradient
-            colors={['rgba(3,3,3,0)', 'rgba(3,3,3,1)']}
-            style={styles.linearGradient}
-          />
-          <View style={styles.boxCard}>
-            <View style={styles.boxSubCard}>
-              <View style={styles.branchActu}>
-                <Text style={[GlobalStyle.titleText, styles.cardText]}>
-                  {props.category}
-                </Text>
-              </View>
-              <Text
-                style={[GlobalStyle.titleText, styles.cardText]}
-                onPress={props.button}>
-                {decode(props.titleContent)}
-              </Text>
-            </View>
-            <View style={styles.boxOption}>
-              <Icon
-                name="share-alt"
-                size={30}
-                color="white"
-                style={styles.icon}
-                onPress={onShare}
-              />
-              <TouchableOpacity onPress={props.favBtn}>
-                <Icon name="star" size={30} style={props.styl} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </ImageBackground>
+      <Image source={{uri: props.picture}} style={styles.imageCard} />
+      <View style={styles.boxCard}>
+        <Text>{props.name}</Text>
+        <Text>{props.country}</Text>
       </View>
     </View>
   );
@@ -66,10 +15,10 @@ const CardActu = props => {
 
 export const styles = StyleSheet.create({
   card: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     height: 300,
     width: '100%',
-    //backgroundColor: 'gray',
+    backgroundColor: 'gray',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -84,7 +33,7 @@ export const styles = StyleSheet.create({
   imageCard: {
     height: '90%',
     width: '100%',
-    borderRadius: 14,
+    borderRadius: 200,
   },
   cardText: {
     color: 'white',
@@ -92,7 +41,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
-  boxCard: {
+  /* boxCard: {
     flexDirection: 'row',
     position: 'absolute',
     top: '50%',
@@ -151,5 +100,6 @@ export const styles = StyleSheet.create({
   btnPress: {
     color: 'red',
   },
+ */
 });
 export default CardActu;
